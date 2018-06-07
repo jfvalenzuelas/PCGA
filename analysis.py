@@ -24,9 +24,18 @@ def copy_rename(new_file_name):
 
 def matchCellPCGA(work_documents, thread):
     if (thread == 1):
-        work_documents = work_documents[:int(len(work_documents)/2)]
+        work_documents_tmp = work_documents[:int(len(work_documents)/2)]
+        work_documents = work_documents_tmp[:int(len(work_documents_tmp)/2)]
     elif (thread == 2):
-        work_documents = work_documents[int(len(work_documents)/2):]
+        work_documents_tmp = work_documents[:int(len(work_documents)/2)]
+        work_documents = work_documents_tmp[int(len(work_documents_tmp)/2):]
+    elif (thread == 3):
+        work_documents_tmp = work_documents[int(len(work_documents)/2):]
+        work_documents = work_documents_tmp[:int(len(work_documents_tmp)/2)]
+    elif (thread == 4):
+        work_documents_tmp = work_documents[int(len(work_documents)/2):]
+        work_documents = work_documents_tmp[int(len(work_documents_tmp)/2):]
+
     nlp = spacy.load('es')
     new_documents = []
     for account in work_documents:

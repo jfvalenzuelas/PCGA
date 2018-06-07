@@ -67,18 +67,30 @@ def run(doc_id):
     print('--TEMPLATE COPIED')
     print('--ANALYSIS BEGIN--')
 
-
+    t1 = time.time()
+    
     thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 1) )
-    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 2) )      
+    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 2) )
+    thread3 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 3) )
+    thread4 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 4) )     
 
     thread1.setDaemon(True)
     thread2.setDaemon(True)
+    thread3.setDaemon(True)
+    thread4.setDaemon(True)
     
     thread1.start()
     thread2.start()
+    thread3.start()
+    thread4.start()
     
     thread1.join()
     thread2.join()
+    thread3.join()
+    thread4.join()
+
+    t2 = time.time()
+    print('EXCEL CELLS ==> '+str(t2-t1)+' seconds')
 
     print('--ANALYSIS END--')
     print('--ALL DONE --')

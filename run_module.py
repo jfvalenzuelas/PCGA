@@ -24,7 +24,6 @@ def run(doc_id):
         data = []
 
         for account in document[0]['data']:
-            print(account)
             aux = []
             aux.append(account['name'])
             aux.append(account['assets'])

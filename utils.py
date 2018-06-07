@@ -59,8 +59,8 @@ def cleanData(df):
 
 def numberToBinary(number):
     try:
-        number = float(number)
         print(number)
+        number = float(number)
         if (number != 0):
             return 1
         else:

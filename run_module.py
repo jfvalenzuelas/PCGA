@@ -24,8 +24,6 @@ def run(doc_id):
         data = []
 
         for account in document[0]['data']:
-            print(len(document[0]['data']))
-            print(account)
             aux = []
             aux.append(account['name'])
             aux.append(account['assets'])
@@ -33,7 +31,8 @@ def run(doc_id):
             aux.append(account['lost'])
             aux.append(account['gain'])
             data.append(aux)
-
+        
+        print(data)
         df = pd.DataFrame(data[0])
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)

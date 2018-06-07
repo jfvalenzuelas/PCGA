@@ -15,7 +15,7 @@ global_lock = threading.Lock()
 
 def writeExcel(documents, file_name):
     print('--WRITING EXCEL--')
-    wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA'+file_name)
+    wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
     sheet = wb['Hoja2']
     for account in documents:
         target_cell = account['target_cell']

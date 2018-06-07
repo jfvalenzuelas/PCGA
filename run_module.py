@@ -36,12 +36,13 @@ def run(doc_id):
             df = pd.DataFrame(aux)
             df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
             df = utils.cleanData(df)
-                
-            wordvec = []
+
             nlp = spacy.load('es')
 
             doc = nlp(df['text'].strip().lower())
             df['text'] = doc.vector_norm
+
+            print(df)
             
             aux = []
             for row in df.iterrows():

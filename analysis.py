@@ -8,8 +8,6 @@ import threading
 global wb
 global sheet
 
-wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
-sheet = wb['Hoja2']
 
 df1 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
 df2 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
@@ -17,6 +15,13 @@ df3 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pat-tokens.csv')
 df4 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-eerr-tokens.csv')
 
 global_lock = threading.Lock()
+
+def open_workbook(file_name):
+    global wb
+    global sheet
+    
+    wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
+    sheet = wb['Hoja2']
 
 def writeExcel(documents, file_name):
     print('--WRITING EXCEL--')

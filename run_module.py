@@ -62,12 +62,13 @@ def run(doc_id):
 
         clf = utils.loadData('var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
         for x in data_copy:
+            print(x)
             print(clf.predict([x]))
 
         print('--1 CHECK--')
 
-    except:
-        pass
+    except e:
+        print(str(e))
 
 if __name__ == '__main__':
     print('--HOLI :) --')

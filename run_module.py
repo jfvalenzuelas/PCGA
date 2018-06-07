@@ -23,6 +23,7 @@ def run(doc_id):
         #First
         document = getDocument(doc_id)
         data = []
+        clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
 
         for account in document[0]['data']:
             aux = []
@@ -31,36 +32,30 @@ def run(doc_id):
             aux.append(account['liabilities'])
             aux.append(account['lost'])
             aux.append(account['gain'])
-            data.append(aux)
-        
-        df = pd.DataFrame(data)
-        df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
-        df = utils.cleanData(df)
-        
-        wordvec = []
-        nlp = spacy.load('es')
+            
+            df = pd.DataFrame(aux)
+            df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
+            df = utils.cleanData(df)
+                
+            wordvec = []
+            nlp = spacy.load('es')
 
-        for x in df['text']:
-            doc = nlp(x.strip().lower())
-            vector = doc.vector_norm
-            wordvec.append(vector)
-
-        df_copy = df[:]
-        df_copy['text'] = wordvec
-
-        data_copy = []
-        for row in df_copy.iterrows():
+            doc = nlp(df['text'].strip().lower())
+            df['text'] = doc.vector_norm
+            
             aux = []
-            aux.append(row[1]['text'])
-            aux.append(utils.numberToBinary(row[1]['val5']))
-            aux.append(utils.numberToBinary(row[1]['val6']))
-            aux.append(utils.numberToBinary(row[1]['val7']))
-            aux.append(utils.numberToBinary(row[1]['val8']))
-            data_copy.append(aux)
+            for row in df.iterrows():
+                aux.append(row[1]['text'])
+                aux.append(utils.numberToBinary(row[1]['val5']))
+                aux.append(utils.numberToBinary(row[1]['val6']))
+                aux.append(utils.numberToBinary(row[1]['val7']))
+                aux.append(utils.numberToBinary(row[1]['val8']))
 
-        clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
-        for x in data_copy:
-            print(x, clf.predict([x]))
+            predicted = clf.predict([aux])
+
+            account['group'] = predicted[0]
+        
+        print(document[0]['data'])
 
         print('--1 CHECK--')
 

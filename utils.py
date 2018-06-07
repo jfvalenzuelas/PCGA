@@ -58,15 +58,11 @@ def cleanData(df):
     return df
 
 def numberToBinary(number):
-    try:
-        print(number)
-        number = float(number)
-        if (number != 0):
-            return 1
-        else:
-            return 0
-    except Exception as e:
-        print(str(e))
+    print(number)
+    number = float(number)
+    if (number != 0):
+        return 1
+    else:
         return 0
 
 def saveData(data, file_name):

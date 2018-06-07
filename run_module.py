@@ -21,7 +21,7 @@ def run(doc_id):
         print('STEP 1')
         #First
         document = getDocument(doc_id)
-        print(document[0])
+        document = document[0]
         data = []
 
         for account in document['data']:

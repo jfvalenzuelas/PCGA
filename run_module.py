@@ -52,7 +52,9 @@ def run(doc_id):
 
         account["group"] = predicted[0]
     
-    print(document[0]['data'])
+    for account in document[0]['data']:
+        print(account)
+        print('\n')
 
     print('--1 CHECK--')
 

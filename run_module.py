@@ -44,8 +44,8 @@ def run(doc_id):
         print(df)
         
         aux = []
+        print(df)
         for row in df.iterrows():
-            print(row[1])
             aux.append(row[1]['text'])
             aux.append(utils.numberToBinary(row[1]['val5']))
             aux.append(utils.numberToBinary(row[1]['val6']))

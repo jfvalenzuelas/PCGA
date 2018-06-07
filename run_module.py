@@ -21,10 +21,9 @@ def run(doc_id):
         print('STEP 1')
         #First
         document = getDocument(doc_id)
-        document = document[0]
         data = []
 
-        for account in document['data']:
+        for account in document[0]['data']:
             aux = []
             aux.append(account['name'])
             aux.append(account['assets'])

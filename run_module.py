@@ -25,9 +25,9 @@ def run(doc_id):
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
     data_aux = []
     for account in document[0]['data']:
-        print(account)
         aux = []
         aux.append(account['name'])
+        print(account['assets'])
         aux.append(account['assets'])
         aux.append(account['liabilities'])
         aux.append(account['lost'])

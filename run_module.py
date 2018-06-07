@@ -22,8 +22,8 @@ def run(doc_id):
     #First
     document = getDocument(doc_id)
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
+    work_document = []
     for account in document[0]['data']:
-        work_document = []
         data_aux = []
         aux = []
         aux.append(account['name'])
@@ -51,14 +51,35 @@ def run(doc_id):
 
         predicted = clf.predict([aux])
 
-        #print(account)
         account["group"] = predicted[0]
         work_document.append(account)
-        #print(account)
-    for account in work_document:
-        print(account)
-        print('\n')
 
+    for account in work_document:
+        print(account['text'])
+        group = int(float(account['group']))
+        text = account['text'].strip()
+        doc = nlp(text)
+        new_text = ''
+
+        for token in doc:
+            if (len(token.lemma_) <= 1):
+                pass
+
+            else:
+                new_text = new_text+' '+str(token.lemma_)
+                
+        account['text'] = new_text
+        print(account['text'])
+
+        if (group == 1):
+            df = pd.read_csv('pcga-act-tokens.csv')
+
+        elif (group == 2):
+            df = pd.read_csv('pcga-pas-tokens.csv')
+        elif (group == 3):
+            df = pd.read_csv('pcga-pat-tokens.csv')
+        elif (group == 4):
+            df = pd.read_csv('pcga-eerr-tokens.csv')
 
     print('--1 CHECK--')
 

@@ -21,7 +21,6 @@ def run(doc_id):
     print('STEP 1')
     #First
     document = getDocument(doc_id)
-    data = []
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
     for account in document[0]['data']:
         data_aux = []
@@ -51,7 +50,7 @@ def run(doc_id):
 
         predicted = clf.predict([aux])
 
-        account['group'] = predicted[0]
+        account["group"] = predicted[0]
     
     print(document[0]['data'])
 

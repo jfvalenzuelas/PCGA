@@ -24,6 +24,10 @@ def run(doc_id):
     t1 = time.time()
     print('RUNNING PCGA')
     #First
+    client = pymongo.MongoClient('localhost', 27654)
+    db = client['scrapper']
+    coll = db.PCGA
+    coll.update_one({'_id': ObjectId(doc_id)}, {'$set': {'processed': 2}})
     document = getDocument(doc_id)
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
     work_document = []
@@ -91,7 +95,8 @@ def run(doc_id):
 
     t2 = time.time()
     print('EXCEL CELLS ==> '+str(t2-t1)+' seconds')
-
+    coll.update_one({'_id': ObjectId(doc_id)}, {'$set': {'processed': 1}})
+    client.close()
     print('--ANALYSIS END--')
     print('--ALL DONE --')
 

@@ -4,6 +4,7 @@ import pymongo
 from bson.objectid import ObjectId
 import utils
 import os
+import spacy
 
 def getDocument(id):
     client = pymongo.MongoClient('localhost', 27654)
@@ -35,7 +36,29 @@ def run(doc_id):
         df = pd.DataFrame(data)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
-        print(df)
+        
+        wordvec = []
+        nlp = spacy.load('es')
+        
+        for x in df['text']:
+            doc = nlp(x.strip().lower())
+            vector = doc.vector_norm
+            wordvec.append(vector)
+
+        df_copy = df[:]
+        df_copy['text'] = wordvec
+
+        data_copy = []
+        for row in df_copy.iterrows():
+            aux = []
+            aux.append(row[1]['text'])
+            aux.append(utils.numberToBinary(row[1]['val5']))
+            aux.append(utils.numberToBinary(row[1]['val6']))
+            aux.append(utils.numberToBinary(row[1]['val7']))
+            aux.append(utils.numberToBinary(row[1]['val8']))
+            data_copy.append(aux)
+        
+        print(data_copy)
         print('--1 CHECK--')
 
     except:

@@ -57,6 +57,16 @@ def cleanData(df):
     df = df.apply(lambda y: y.str.strip() if(y.dtype == 'object') else y)
     return df
 
+def numberToBinary(number):
+    try:
+        number = float(number)
+        if (number != 0):
+            return 1
+        else:
+            return 0
+    except:
+        return 0
+        
 def saveData(data, file_name):
     with open('models/'+file_name+'.pickle', 'wb') as f:
         pickle.dump(data, f)

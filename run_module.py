@@ -23,7 +23,7 @@ def run(doc_id):
     document = getDocument(doc_id)
     data = []
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
-
+    data_aux = []
     for account in document[0]['data']:
         aux = []
         aux.append(account['name'])
@@ -31,8 +31,9 @@ def run(doc_id):
         aux.append(account['liabilities'])
         aux.append(account['lost'])
         aux.append(account['gain'])
+        data_aux.append(aux)
         
-        df = pd.DataFrame(aux)
+        df = pd.DataFrame(data_aux)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
 

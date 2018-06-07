@@ -67,19 +67,19 @@ def run(doc_id):
 
             else:
                 new_text = new_text+' '+str(token.lemma_)
-                
+
         account['text'] = new_text
         print(account['text'])
 
         if (group == 1):
-            df = pd.read_csv('pcga-act-tokens.csv')
+            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
 
         elif (group == 2):
-            df = pd.read_csv('pcga-pas-tokens.csv')
+            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
         elif (group == 3):
-            df = pd.read_csv('pcga-pat-tokens.csv')
+            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pat-tokens.csv')
         elif (group == 4):
-            df = pd.read_csv('pcga-eerr-tokens.csv')
+            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-eerr-tokens.csv')
 
     print('--1 CHECK--')
 

@@ -5,6 +5,11 @@ import os
 from openpyxl import load_workbook
 import utils
 import threading
+global wb
+global sheet
+
+wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
+sheet = wb['Hoja2']
 
 df1 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
 df2 = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
@@ -15,8 +20,6 @@ global_lock = threading.Lock()
 
 def writeExcel(documents, file_name):
     print('--WRITING EXCEL--')
-    wb = load_workbook('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
-    sheet = wb['Hoja2']
     for account in documents:
         target_cell = account['target_cell']
         target_cell = sheet[target_cell]
@@ -37,7 +40,7 @@ def writeExcel(documents, file_name):
         else:
             aux = float(("{0:.2f}".format(target_cell.value)))
             target_cell.value = value + aux
-        wb.save('/var/www/html/scrapper/public/reports/PCGA'+file_name)
+    wb.save('/var/www/html/scrapper/public/reports/PCGA'+file_name)
     wb.close()
 
 def copy_rename(new_file_name):

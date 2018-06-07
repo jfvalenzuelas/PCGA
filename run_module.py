@@ -60,7 +60,7 @@ def run(doc_id):
         
         print(len(data_copy))
 
-        clf = utils.loadData('models/topmodel95.41.pickle')
+        clf = utils.loadData('var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
         for x in data_copy:
             print(clf.predict([x]))
 

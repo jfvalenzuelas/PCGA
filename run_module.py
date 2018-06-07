@@ -55,7 +55,8 @@ def run(doc_id):
         work_document.append(account)
 
     for account in work_document:
-        print(account['text'])
+        print(account)
+        #print(account['text'])
         group = int(float(account['group']))
         text = account['text'].strip()
         doc = nlp(text)

@@ -32,10 +32,10 @@ def run(doc_id):
             aux.append(account['gain'])
             data.append(aux)
         
-        print(data)
-        df = pd.DataFrame(data[0])
+        df = pd.DataFrame(data)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
+        print(df)
         print('--1 CHECK--')
 
     except:

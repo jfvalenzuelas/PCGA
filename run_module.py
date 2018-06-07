@@ -27,12 +27,13 @@ def run(doc_id):
     for account in document[0]['data']:
         aux = []
         aux.append(account['name'])
-        print(account['assets'])
         aux.append(account['assets'])
         aux.append(account['liabilities'])
         aux.append(account['lost'])
         aux.append(account['gain'])
         data_aux.append(aux)
+    
+        print(data_aux)
         
         df = pd.DataFrame(data_aux)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']

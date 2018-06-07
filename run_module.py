@@ -25,6 +25,7 @@ def run(doc_id):
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
     data_aux = []
     for account in document[0]['data']:
+        print(account)
         aux = []
         aux.append(account['name'])
         aux.append(account['assets'])
@@ -44,7 +45,6 @@ def run(doc_id):
         print(df)
         
         aux = []
-        print(df)
         for row in df.iterrows():
             aux.append(row[1]['text'])
             aux.append(utils.numberToBinary(row[1]['val5']))

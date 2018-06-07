@@ -38,6 +38,7 @@ def run(doc_id):
         df = pd.DataFrame(data_aux)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
+        print(df)
 
         nlp = spacy.load('es')
         doc = nlp(df['text'][0].strip().lower())

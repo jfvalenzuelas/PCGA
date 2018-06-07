@@ -38,7 +38,7 @@ def run(doc_id):
         df = utils.cleanData(df)
 
         nlp = spacy.load('es')
-
+        print(df['text'])
         doc = nlp(df['text'].strip().lower())
         df['text'] = doc.vector_norm
 

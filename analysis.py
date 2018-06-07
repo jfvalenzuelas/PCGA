@@ -37,7 +37,7 @@ def writeExcel(documents, file_name):
         else:
             aux = float(("{0:.2f}".format(target_cell.value)))
             target_cell.value = value + aux
-    wb.save('/var/www/html/scrapper/public/reports/PCGA'+file_name)
+    wb.save('/var/www/html/scrapper/public/reports/PCGA/'+file_name)
     wb.close()
 
 def copy_rename(new_file_name):

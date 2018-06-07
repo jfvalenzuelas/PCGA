@@ -23,6 +23,7 @@ def run(doc_id):
     document = getDocument(doc_id)
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
     for account in document[0]['data']:
+        work_document = []
         data_aux = []
         aux = []
         aux.append(account['name'])
@@ -52,11 +53,12 @@ def run(doc_id):
 
         #print(account)
         account["group"] = predicted[0]
+        work_document.append(account)
         #print(account)
-
-    for account in document[0]['data']:
+    for account in work_document:
         print(account)
         print('\n')
+
 
     print('--1 CHECK--')
 

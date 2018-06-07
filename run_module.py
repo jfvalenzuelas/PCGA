@@ -67,11 +67,9 @@ def run(doc_id):
     print('--TEMPLATE COPIED')
     print('--ANALYSIS BEGIN--')
 
-    sub_docs1 = list(work_document[:int(len(work_document)/2)])
-    sub_docs2 = list(work_document[int(len(work_document)/2):])
 
-    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(sub_docs1) )
-    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(sub_docs2) )      
+    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 1) )
+    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 2) )      
 
     thread1.setDaemon(True)
     thread2.setDaemon(True)

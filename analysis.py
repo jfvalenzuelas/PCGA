@@ -12,7 +12,7 @@ def writeExcel(documents):
     for account in documents:
         print(account)
         print('\n')
-        
+
 def copy_rename(new_file_name):
         dst_dir= '/var/www/html/scrapper/public/reports/PCGA'
         src_file = '/var/www/html/scrapper/PCGA/pcga-template.xlsx'
@@ -22,7 +22,11 @@ def copy_rename(new_file_name):
         new_dst_file_name = os.path.join(dst_dir, new_file_name)
         os.rename(dst_file, new_dst_file_name)
 
-def matchCellPCGA(work_documents):
+def matchCellPCGA(work_documents, thread):
+    if (thread == 1):
+        work_documents = work_documents[:int(len(work_documents)/2)]
+    elif (thread == 2):
+        work_documents = work_documents[int(len(work_documents)/2):]
     nlp = spacy.load('es')
     new_documents = []
     for account in work_documents:

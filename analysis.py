@@ -21,13 +21,13 @@ def writeExcel(documents, file_name):
         target_cell = account['target_cell']
         target_cell = sheet[target_cell]
         value = 0
-        if (account['assets'] > 0):
+        if (float(account['assets']) > 0):
             value = utils.formatNumber(account['assets'])
-        elif (account['liabilities'] > 0):
+        elif (float(account['liabilities']) > 0):
             value = utils.formatNumber(account['liabilities'])
-        elif (account['lost'] > 0):
+        elif (float(account['lost']) > 0):
             value = utils.formatNumber(account['lost'])
-        elif (account['gain'] > 0):
+        elif (float(account['gain']) > 0):
             value = utils.formatNumber(account['gain'])
         
         if (target_cell.value == None):

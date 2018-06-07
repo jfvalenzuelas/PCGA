@@ -23,6 +23,7 @@ def run(doc_id):
         document = getDocument(doc_id)
         data = []
 
+        print(document[0]['data'])
         for account in document[0]['data']:
             aux = []
             aux.append(account['name'])
@@ -33,10 +34,8 @@ def run(doc_id):
             data.append(aux)
         print('XXXX')
         df = pd.DataFrame(data[0])
-        print(df)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
-        print(df)
         print('--1 CHECK--')
 
     except:

@@ -32,20 +32,15 @@ def run(doc_id):
         aux.append(account['lost'])
         aux.append(account['gain'])
         data_aux.append(aux)
-    
-        print(data_aux)
         
         df = pd.DataFrame(data_aux)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
-        print(df)
 
         nlp = spacy.load('es')
         doc = nlp(df['text'][0].strip().lower())
         df['text'] = doc.vector_norm
-
-        print(df)
-        
+      
         aux = []
         for row in df.iterrows():
             aux.append(row[1]['text'])

@@ -50,11 +50,13 @@ def run(doc_id):
 
         predicted = clf.predict([aux])
 
-        account["group"] = predicted[0]
-    
-    for account in document[0]['data']:
         print(account)
-        print('\n')
+        account["group"] = predicted[0]
+        print(account)
+
+    #for account in document[0]['data']:
+    #    print(account)
+    #    print('\n')
 
     print('--1 CHECK--')
 

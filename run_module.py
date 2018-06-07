@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 import utils
 import os
 import spacy
+import time
 
 def getDocument(id):
     client = pymongo.MongoClient('localhost', 27654)
@@ -18,6 +19,7 @@ def getDocument(id):
     return cursor
 
 def run(doc_id):
+    t1 = time.time()
     print('STEP 1')
     #First
     document = getDocument(doc_id)
@@ -54,9 +56,10 @@ def run(doc_id):
 
         account["group"] = predicted[0]
         work_document.append(account)
-
+    t2 = time.time()
+    print('PREDICTIONS ==> '+str(t2-t1/60)+' MINUTES')
+    
     for account in work_document:
-        print(account['clean_text'])
         group = int(float(account['group']))
         text = account['clean_text'].strip()
         doc = nlp(text)
@@ -69,22 +72,21 @@ def run(doc_id):
             else:
                 new_text = new_text+' '+str(token.lemma_)
 
-        account['clean_text'] = new_text
-        print(account['clean_text'])
-        print('\n')
+        account['clean_text'] = new_text.strip()
 
         if (group == 1):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
+            print(1)
 
         elif (group == 2):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
-
+            print(2)
         elif (group == 3):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pat-tokens.csv')
-
+            print(3)
         elif (group == 4):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-eerr-tokens.csv')
-            
+            print(4)
 
     print('--1 CHECK--')
 

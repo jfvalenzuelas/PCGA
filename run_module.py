@@ -61,7 +61,7 @@ def run(doc_id):
     t2 = time.time()
     print('PREDICTIONS ==> '+str(t2-t1)+' seconds')
 
-    file_name = document[0]['title']+'.xlsx'
+    file_name = doc_id+'.xlsx'
     analysis.copy_rename(file_name)
 
     print('--TEMPLATE COPIED')

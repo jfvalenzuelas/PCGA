@@ -57,13 +57,10 @@ def run(doc_id):
             aux.append(utils.numberToBinary(row[1]['val7']))
             aux.append(utils.numberToBinary(row[1]['val8']))
             data_copy.append(aux)
-        
-        print(len(data_copy))
 
         clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
         for x in data_copy:
-            print(x)
-            print(clf.predict([x]))
+            print(x, clf.predict([x]))
 
         print('--1 CHECK--')
 

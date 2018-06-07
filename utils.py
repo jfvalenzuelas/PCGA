@@ -60,13 +60,15 @@ def cleanData(df):
 def numberToBinary(number):
     try:
         number = float(number)
+        print(number)
         if (number != 0):
             return 1
         else:
             return 0
-    except:
+    except Exception as e:
+        print(str(e))
         return 0
-        
+
 def saveData(data, file_name):
     with open('models/'+file_name+'.pickle', 'wb') as f:
         pickle.dump(data, f)

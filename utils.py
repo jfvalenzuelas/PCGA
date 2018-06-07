@@ -2,7 +2,8 @@ import pandas as pd
 import pickle
 
 def cleanData(df):
-    df = df.apply(lambda y: y.str.replace('[0-9]*-[0-9]*-[0-9]*-[0-9]*-[0-9]*\s', '') if(y.dtype == 'object') else y)
+    df = df.apply(lambda y: y.str.replace('[0-9]*-[0-9]*-[0-9]*-[0-9]*\s', '') if(y.dtype == 'object') else y)
+    df = df.apply(lambda y: y.str.replace('[0-9]*-[0-9]*', '') if(y.dtype == 'object') else y)
     df = df.apply(lambda y: y.str.lower() if(y.dtype == 'object') else y)
     df = df.apply(lambda y: y.str.replace('.', ' ') if(y.dtype == 'object') else y)
     df = df.apply(lambda y: y.str.replace('-', ' ') if(y.dtype == 'object') else y)

@@ -23,8 +23,8 @@ def run(doc_id):
     document = getDocument(doc_id)
     data = []
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
-    data_aux = []
     for account in document[0]['data']:
+        data_aux = []
         aux = []
         aux.append(account['name'])
         aux.append(account['assets'])

@@ -18,6 +18,7 @@ def getDocument(id):
 
 def run(doc_id):
     try:
+        print('STEP 1')
         #First
         document = getDocument(doc_id)
         data = []

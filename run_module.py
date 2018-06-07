@@ -68,11 +68,11 @@ def run(doc_id):
     print('--ANALYSIS BEGIN--')
 
     t1 = time.time()
-    
-    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 1) )
-    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 2) )
-    thread3 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 3) )
-    thread4 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 4) )     
+
+    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 1, file_name) )
+    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 2, file_name) )
+    thread3 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 3, file_name) )
+    thread4 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document, 4, file_name) )     
 
     thread1.setDaemon(True)
     thread2.setDaemon(True)

@@ -66,8 +66,12 @@ def run(doc_id):
 
     print('--TEMPLATE COPIED')
     print('--ANALYSIS BEGIN--')
-    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document[:len(work_document)]) )
-    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document[len(work_document):]) )      
+    
+    sub_docs1 = work_document[:int(len(work_document)/2)]
+    sub_docs2 = work_document[int(len(work_document)/2):]
+
+    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(sub_docs1) )
+    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(sub_docs2) )      
 
     thread1.setDaemon(True)
     thread2.setDaemon(True)
@@ -77,7 +81,7 @@ def run(doc_id):
     
     thread1.join()
     thread2.join()
-    
+
     print('--ANALYSIS END--')
     print('--ALL DONE --')
 

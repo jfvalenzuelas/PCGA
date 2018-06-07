@@ -50,18 +50,19 @@ def matchCellPCGA(work_documents, thread):
             doc1 = nlp(account['clean_text'])
             for column in df1:
                 headers.append(column)
-
+                aux_simil = []
                 for x in df1[column]:
                     if (type(x) == str):
                         doc2 = nlp(x)
                         simil = doc1.similarity(doc2)
-
                         if (simil == 1.0):
+                            aux_simil.append(simil)
                             break 
                         else:
-                            total_simil.append(simil)
+                            aux_simil.append(simil)
                     else:
                         break
+                total_simil.append(max(aux_simil))
             cell = headers[total_simil.index(max(total_simil))]
             account['target_cell'] = cell
 
@@ -71,18 +72,19 @@ def matchCellPCGA(work_documents, thread):
             doc1 = nlp(account['clean_text'])
             for column in df2:
                 headers.append(column)
-
+                aux_simil = []
                 for x in df2[column]:
                     if (type(x) == str):
                         doc2 = nlp(x)
                         simil = doc1.similarity(doc2)
-
                         if (simil == 1.0):
+                            aux_simil.append(simil)
                             break 
                         else:
-                            total_simil.append(simil)
+                            aux_simil.append(simil)
                     else:
                         break
+                total_simil.append(max(aux_simil))
             cell = headers[total_simil.index(max(total_simil))]
             account['target_cell'] = cell
 
@@ -92,18 +94,20 @@ def matchCellPCGA(work_documents, thread):
             doc1 = nlp(account['clean_text'])
             for column in df3:
                 headers.append(column)
-
+                aux_simil = []
                 for x in df3[column]:
                     if (type(x) == str):
                         doc2 = nlp(x)
                         simil = doc1.similarity(doc2)
 
                         if (simil == 1.0):
+                            aux_simil.append(simil)
                             break 
                         else:
-                            total_simil.append(simil)
+                            aux_simil.append(simil)
                     else:
                         break
+                total_simil.append(max(aux_simil))
             cell = headers[total_simil.index(max(total_simil))]
             account['target_cell'] = cell
 
@@ -113,18 +117,20 @@ def matchCellPCGA(work_documents, thread):
             doc1 = nlp(account['clean_text'])
             for column in df4:
                 headers.append(column)
-
+                aux_simil = []
                 for x in df4[column]:
                     if (type(x) == str):
                         doc2 = nlp(x)
                         simil = doc1.similarity(doc2)
 
                         if (simil == 1.0):
+                            aux_simil.append(simil)
                             break 
                         else:
-                            total_simil.append(simil)
+                            aux_simil.append(simil)
                     else:
                         break
+                total_simil.append(max(aux_simil))
             cell = headers[total_simil.index(max(total_simil))]
             account['target_cell'] = cell
 

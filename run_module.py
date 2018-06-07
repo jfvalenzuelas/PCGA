@@ -6,6 +6,8 @@ import utils
 import os
 import spacy
 import time
+import analysis
+import threading
 
 def getDocument(id):
     client = pymongo.MongoClient('localhost', 27654)
@@ -20,7 +22,7 @@ def getDocument(id):
 
 def run(doc_id):
     t1 = time.time()
-    print('STEP 1')
+    print('RUNNING PCGA')
     #First
     document = getDocument(doc_id)
     clf = utils.loadData('/var/www/html/scrapper/PCGA/models/topmodel95.41.pickle')
@@ -57,39 +59,28 @@ def run(doc_id):
         account["group"] = predicted[0]
         work_document.append(account)
     t2 = time.time()
-    print('PREDICTIONS ==> '+str(t2-t1/60)+' MINUTES')
+    print('PREDICTIONS ==> '+str(t2-t1)+' seconds')
+
+    file_name = document[0]['title']+'.xlsx'
+    analysis.copy_rename(file_name)
+
+    print('--TEMPLATE COPIED')
+    print('--ANALYSIS BEGIN--')
+    thread1 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document[:len(work_document)]) )
+    thread2 = threading.Thread( target=analysis.matchCellPCGA, args=(work_document[len(work_document):]) )      
+
+    thread1.setDaemon(True)
+    thread2.setDaemon(True)
     
-    for account in work_document:
-        group = int(float(account['group']))
-        text = account['clean_text'].strip()
-        doc = nlp(text)
-        new_text = ''
-
-        for token in doc:
-            if (len(token.lemma_) <= 1):
-                pass
-
-            else:
-                new_text = new_text+' '+str(token.lemma_)
-
-        account['clean_text'] = new_text.strip()
-
-        if (group == 1):
-            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
-            print(1)
-
-        elif (group == 2):
-            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
-            print(2)
-        elif (group == 3):
-            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pat-tokens.csv')
-            print(3)
-        elif (group == 4):
-            df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-eerr-tokens.csv')
-            print(4)
-
-    print('--1 CHECK--')
+    thread1.start()
+    thread2.start()
+    
+    thread1.join()
+    thread2.join()
+    
+    print('--ANALYSIS END--')
+    print('--ALL DONE --')
 
 if __name__ == '__main__':
-    print('--HOLI :) --')
+    print('--HOL :) --')
     run(os.sys.argv[1])

@@ -36,6 +36,7 @@ def run(doc_id):
         df = pd.DataFrame(data_aux)
         df.columns = ['text', 'val5', 'val6', 'val7', 'val8']
         df = utils.cleanData(df)
+        account["clean_text"] = df['text'][0]
 
         nlp = spacy.load('es')
         doc = nlp(df['text'][0].strip().lower())
@@ -55,10 +56,9 @@ def run(doc_id):
         work_document.append(account)
 
     for account in work_document:
-        print(account)
-        #print(account['text'])
+        print(account['clean_text'])
         group = int(float(account['group']))
-        text = account['text'].strip()
+        text = account['clean_text'].strip()
         doc = nlp(text)
         new_text = ''
 
@@ -69,18 +69,22 @@ def run(doc_id):
             else:
                 new_text = new_text+' '+str(token.lemma_)
 
-        account['text'] = new_text
-        print(account['text'])
+        account['clean_text'] = new_text
+        print(account['clean_text'])
+        print('\n')
 
         if (group == 1):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-act-tokens.csv')
 
         elif (group == 2):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pas-tokens.csv')
+
         elif (group == 3):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-pat-tokens.csv')
+
         elif (group == 4):
             df = pd.read_csv('/var/www/html/scrapper/PCGA/utils/pcga-eerr-tokens.csv')
+            
 
     print('--1 CHECK--')
 

@@ -20,6 +20,7 @@ def writeExcel(documents, file_name):
     for account in documents:
         target_cell = account['target_cell']
         target_cell = sheet[target_cell]
+        print(target_cell)
         value = 0
         if (float(account['assets']) > 0):
             value = utils.formatNumber(account['assets'])
@@ -30,12 +31,13 @@ def writeExcel(documents, file_name):
         elif (float(account['gain']) > 0):
             value = utils.formatNumber(account['gain'])
         
+        print(value)
         if (target_cell.value == None):
             target_cell.value = value
         else:
             aux = float(("{0:.2f}".format(target_cell.value)))
             target_cell.value = value + aux
-    wb.save('/var/www/html/scrapper/public/reports/PCGA'+file_name)
+        wb.save('/var/www/html/scrapper/public/reports/PCGA'+file_name)
     wb.close()
 
 def copy_rename(new_file_name):

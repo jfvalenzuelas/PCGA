@@ -39,7 +39,7 @@ def run(doc_id):
         
         wordvec = []
         nlp = spacy.load('es')
-        
+
         for x in df['text']:
             doc = nlp(x.strip().lower())
             vector = doc.vector_norm
@@ -58,7 +58,12 @@ def run(doc_id):
             aux.append(utils.numberToBinary(row[1]['val8']))
             data_copy.append(aux)
         
-        print(data_copy)
+        print(len(data_copy))
+
+        clf = utils.loadData('models/topmodel95.41.pickle')
+        for x in data_copy:
+            print(clf.predict([x]))
+
         print('--1 CHECK--')
 
     except:
